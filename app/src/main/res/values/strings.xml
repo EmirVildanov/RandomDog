@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">RandomDog</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="home_fragment_label">Home</string>
+    <string name="download_fragment_label">Download</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_home_fragment">Hello, Home fragment</string>
+    <string name="hello_download_fragment">Hello download fragment. Arg: %1$s</string>
+    <string name="show_new_image">Show new image</string>
+    <string name="load_new_image">Load new image</string>
+    <string name="image_of_a_dog">Image of a dog</string>
+    <string name="there_is_no_texts_yet">There is no texts yet</string>
+    <string name="download_new_text">Download new text</string>
+    <string name="library">Library</string>
+    <string name="settings_fragment_label">Settings</string>
+    <string name="library_fragment_label">Library</string>
+    <string name="caution_it_barks">Caution: It barks</string>
+    <string name="load_new_dog">Load new dog</string>
+    <string name="headphones_icon">headphonesIcon</string>
+    <string name="thanks_to">Thanks to</string>
+    <string name="davidvalachovic"><a href="https://twitter.com/AdenFlorian">\@David Valachovic</a></string>
+    <string name="it_is_empty_yet">It is empty yet</string>
+    <string name="copy_link_to_clipboard">Copy link to clipboard</string>
+</resources>

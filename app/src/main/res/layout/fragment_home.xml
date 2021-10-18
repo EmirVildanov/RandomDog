@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.home.HomeFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.randomdog.ui.home.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/dark_blue">
+
+        <ImageView
+            android:id="@+id/image_view_of_a_dog"
+            android:layout_width="357dp"
+            android:layout_height="393dp"
+            android:contentDescription="@string/image_of_a_dog"
+            android:scaleType="fitXY"
+            android:src="@drawable/dog_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/image_interaction_layout"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/image_interaction_layout"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/thanks_constraint_layout"
+            app:layout_constraintEnd_toEndOf="@+id/thanks_constraint_layout"
+            app:layout_constraintStart_toStartOf="@+id/thanks_constraint_layout"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_of_a_dog">
+
+            <ProgressBar
+                android:id="@+id/image_loading_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressDrawable="@drawable/progress_bar"
+                tools:progress="25"
+                tools:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/copy_to_clipboard_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/copy_link_to_clipboard"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/thanks_constraint_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_border"
+            app:layout_constraintBottom_toTopOf="@+id/caution_layout"
+            app:layout_constraintEnd_toEndOf="@+id/image_view_of_a_dog"
+            app:layout_constraintStart_toStartOf="@+id/image_view_of_a_dog"
+            app:layout_constraintTop_toBottomOf="@id/image_interaction_layout">
+
+            <TextView
+                android:id="@+id/thanks_to_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thanks_to"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/nickname_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/nickname_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/davidvalachovic"
+                android:textColorLink="@color/yellow"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/thanks_to_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/caution_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thanks_constraint_layout"
+            app:layout_constraintBottom_toTopOf="@+id/load_new_image_button">
+            <ImageView
+                android:id="@+id/headphones_icon_image_view"
+                android:layout_width="61dp"
+                android:layout_height="47dp"
+                android:src="@drawable/ic_baseline_headset_24"
+                app:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/caution_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/headphones_icon" />
+
+            <TextView
+                android:id="@+id/caution_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_it_barks"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/headphones_icon_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/load_new_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/load_new_dog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/caution_layout"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
