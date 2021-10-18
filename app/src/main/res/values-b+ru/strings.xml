@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RandomDog</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="home_fragment_label">Главная страница</string>
+
+    <string name="image_of_a_dog">Картинка собаки</string>
+    <string name="library">Библиотека</string>
+    <string name="settings_fragment_label">Настройки</string>
+    <string name="library_fragment_label">Библиотека</string>
+    <string name="caution_it_barks">Осторожно: кнопка гавкает</string>
+    <string name="load_new_dog">Загрузить новую собаку</string>
+    <string name="headphones_icon">Иконка наушников</string>
+    <string name="thanks_to">Спасибо</string>
+    <string name="davidvalachovic"><a href="https://twitter.com/AdenFlorian">\@David Valachovic</a></string>
+    <string name="it_is_empty_yet">Пока что пусто</string>
+    <string name="copy_link_to_clipboard">Скопировать ссылку</string>
+    <string name="internet_is_not_available">Интернет недоступен</string>
+    <string name="link_copied_to_clipboard">Ссылка скопирована</string>
+    <string name="change_language">Сменить язык</string>
+    <string name="choose_language">Выберите язык</string>
+    <string name="you_may_visit_the_random_dog_site_author_s_github_here">Можете посетить github автора random.dog здесь :</string>
+    <string name="adenflorian_github"><a href="https://github.com/AdenFlorian/random.dog">AdenFlorian Github</a></string>
+    <string name="you_may_visit_the_random_dog_site_here">Можете посетить random.dog здесь :</string>
+    <string name="random_dog_site"><a href="https://random.dog/">random.dog</a></string>
+</resources>

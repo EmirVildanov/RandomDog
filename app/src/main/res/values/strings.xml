@@ -1,19 +1,11 @@
 <resources>
     <string name="app_name">RandomDog</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="home_fragment_label">Home</string>
-    <string name="download_fragment_label">Download</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_home_fragment">Hello, Home fragment</string>
-    <string name="hello_download_fragment">Hello download fragment. Arg: %1$s</string>
-    <string name="show_new_image">Show new image</string>
-    <string name="load_new_image">Load new image</string>
+    <string name="saved_language_key" translatable="false">com.example.randomdog.PREFERENCE_LANGUAGE_KEY</string>
+
     <string name="image_of_a_dog">Image of a dog</string>
-    <string name="there_is_no_texts_yet">There is no texts yet</string>
-    <string name="download_new_text">Download new text</string>
     <string name="library">Library</string>
     <string name="settings_fragment_label">Settings</string>
     <string name="library_fragment_label">Library</string>
@@ -24,4 +16,12 @@
     <string name="davidvalachovic"><a href="https://twitter.com/AdenFlorian">\@David Valachovic</a></string>
     <string name="it_is_empty_yet">It is empty yet</string>
     <string name="copy_link_to_clipboard">Copy link to clipboard</string>
+    <string name="internet_is_not_available">Internet is not available</string>
+    <string name="link_copied_to_clipboard">Link copied to clipboard</string>
+    <string name="change_language">Change language</string>
+    <string name="choose_language">Choose language</string>
+    <string name="you_may_visit_the_random_dog_site_author_s_github_here">You may visit the random.dog site author\'s github here :</string>
+    <string name="adenflorian_github"><a href="https://github.com/AdenFlorian/random.dog">AdenFlorian Github</a></string>
+    <string name="you_may_visit_the_random_dog_site_here">You may visit the random.dog site here :</string>
+    <string name="random_dog_site"><a href="https://random.dog/">random.dog</a></string>
 </resources>

@@ -76,7 +76,7 @@ class GlideImageLoader(
     }
 
     private fun onFinished() {
-//        progressBar.progress = 0
+        progressBar.progress = 0
         progressBar.visibility = View.GONE
         copyToClipboardButton.visibility = View.VISIBLE
         imageView.visibility = View.VISIBLE

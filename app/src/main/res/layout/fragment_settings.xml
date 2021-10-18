@@ -5,6 +5,7 @@
     tools:context=".ui.settings.SettingsFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.randomdog.ui.settings.SettingsViewModel" />
@@ -15,44 +16,77 @@
         android:layout_height="match_parent"
         tools:background="@color/dark_blue">
 
+        <Button
+            android:id="@+id/change_language_button"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/change_language"
+            app:layout_constraintBottom_toTopOf="@+id/author_info_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/downloaded_texts_layout"
+            android:id="@+id/author_info_layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/downloaded_text_recycler_view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="1dp"
-                android:padding="20dp"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_downloaded_text" />
+            app:layout_constraintTop_toBottomOf="@id/change_language_button">
 
             <TextView
-                android:id="@+id/text_view_empty_downloaded_recycler_view"
+                android:id="@+id/github_link_header_text_view"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
-                android:text="@string/it_is_empty_yet"
+                android:text="@string/you_may_visit_the_random_dog_site_author_s_github_here"
                 android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/github_link_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/adenflorian_github"
+                android:textColorLink="@color/yellow"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/github_link_header_text_view" />
+
+            <TextView
+                android:id="@+id/site_link_header_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/you_may_visit_the_random_dog_site_here"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/github_link_text_view" />
+
+            <TextView
+                android:id="@+id/site_link_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/random_dog_site"
+                android:textColorLink="@color/yellow"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/site_link_header_text_view" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

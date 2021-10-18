@@ -1,7 +1,8 @@
 package com.example.randomdog.network
 
+import android.app.Activity
 import android.content.Context
-import com.example.randomdog.data.RandomDogApplication
+import com.example.randomdog.RandomDogApplication
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
@@ -46,7 +47,7 @@ abstract class NetworkService {
 
     suspend fun getSuccessfulResponseOrException(
         application: RandomDogApplication? = null,
-        context: Context? = null,
+        activity: Activity? = null,
         funcBody: suspend () -> HttpResponse
     ): HttpResponse? {
         val response: HttpResponse
@@ -55,7 +56,7 @@ abstract class NetworkService {
             Timber.e("Null application")
         }
         if (application != null) {
-            if (!application.isInternetAvailable(context!!)) {
+            if (!application.isInternetAvailable(activity!!)) {
                 Timber.e("ENABLE YOUR INTERNET CONNECTION")
                 return null
             }

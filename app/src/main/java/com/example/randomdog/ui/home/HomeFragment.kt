@@ -1,16 +1,13 @@
 package com.example.randomdog.ui.home
 
-import android.R.attr.label
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +15,7 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.request.RequestOptions
 import com.example.randomdog.MainActivity
 import com.example.randomdog.R
+import com.example.randomdog.RandomDogApplication
 import com.example.randomdog.databinding.FragmentHomeBinding
 import io.ktor.util.*
 import kotlinx.coroutines.CoroutineScope
@@ -57,9 +55,15 @@ class HomeFragment : Fragment() {
 
         binding.loadNewImageButton.setOnClickListener {
             playBarkSound()
-            val currentTime = Calendar.getInstance().time
-            Timber.i("Date: $currentTime")
-            viewModel.getNewImageUrl()
+            val activity = requireActivity()
+            val application = activity.application as RandomDogApplication
+            if (!application.isInternetAvailable(activity)) {
+                application.showToast(activity, getString(R.string.internet_is_not_available))
+            } else {
+                val currentTime = Calendar.getInstance().time
+                Timber.i("Date: $currentTime")
+                viewModel.getNewImageUrl()
+            }
         }
 
         binding.copyToClipboardButton.setOnClickListener {
@@ -67,6 +71,8 @@ class HomeFragment : Fragment() {
                 requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("Copied Text", viewModel.currentDogPictureData.value!!.url)
             clipboard.setPrimaryClip(clip)
+            val application = requireActivity().application as RandomDogApplication
+            application.showToast(requireActivity(), getString(R.string.link_copied_to_clipboard))
         }
 
         binding.nicknameTextView.movementMethod = LinkMovementMethod.getInstance()
@@ -79,10 +85,7 @@ class HomeFragment : Fragment() {
                 .error(R.drawable.ic_baseline_error_24)
                 .priority(Priority.HIGH)
 
-            GlideImageLoader(binding.imageViewOfADog, binding.imageLoadingProgressBar, binding.loadNewImageButton, binding.copyToClipboardButton).load(pictureData.url, options)
-//            GlideApp.with(this)
-//                .load(pictureData.url)
-//                .into(binding.imageViewOfADog);
+            GlideImageLoader(binding.imageViewOfADogInside, binding.imageLoadingProgressBar, binding.loadNewImageButton, binding.copyToClipboardButton).load(pictureData.url, options)
         })
 
         return binding.root
@@ -101,7 +104,6 @@ class HomeFragment : Fragment() {
                 mediaPlayer.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
                 mediaPlayer.prepare()
                 mediaPlayer.start()
-//                afd.close()
             } else {
                 Timber.e("Afd is null")
             }

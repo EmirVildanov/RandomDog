@@ -15,17 +15,41 @@
         android:layout_height="match_parent"
         tools:background="@color/dark_blue">
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:id="@+id/image_view_of_a_dog"
             android:layout_width="357dp"
             android:layout_height="393dp"
-            android:contentDescription="@string/image_of_a_dog"
-            android:scaleType="fitXY"
-            android:src="@drawable/dog_image"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/image_interaction_layout"/>
+            app:layout_constraintBottom_toTopOf="@+id/image_interaction_layout">
+
+            <ImageView
+                android:id="@+id/image_view_of_a_dog_inside"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/image_of_a_dog"
+                android:scaleType="fitXY"
+                android:src="@drawable/dog_image"
+                />
+        </androidx.cardview.widget.CardView>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/image_view_of_a_dog"-->
+<!--            android:layout_width="357dp"-->
+<!--            android:layout_height="393dp"-->
+<!--            android:contentDescription="@string/image_of_a_dog"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/bones_background_1"-->
+<!--            android:background="@drawable/outline_round"-->
+<!--            android:outlineProvider="background"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/image_interaction_layout"/>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/image_interaction_layout"
@@ -41,18 +65,18 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:progressDrawable="@drawable/progress_bar"
                 tools:progress="25"
-                tools:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/copy_to_clipboard_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:text="@string/copy_link_to_clipboard"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
