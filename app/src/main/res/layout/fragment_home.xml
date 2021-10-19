@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.randomdog.ui.home.HomeViewModel" />
+            type="com.vildanov.randomdog.ui.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,20 +37,6 @@
                 />
         </androidx.cardview.widget.CardView>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/image_view_of_a_dog"-->
-<!--            android:layout_width="357dp"-->
-<!--            android:layout_height="393dp"-->
-<!--            android:contentDescription="@string/image_of_a_dog"-->
-<!--            android:scaleType="fitXY"-->
-<!--            android:src="@drawable/bones_background_1"-->
-<!--            android:background="@drawable/outline_round"-->
-<!--            android:outlineProvider="background"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintBottom_toTopOf="@+id/image_interaction_layout"/>-->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/image_interaction_layout"
             android:layout_width="0dp"
@@ -65,6 +51,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:progressDrawable="@drawable/progress_bar"
                 tools:progress="25"
+                tools:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -72,15 +59,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/copy_to_clipboard_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/interaction_buttons_layout"
+                android:layout_width="match_parent"
                 android:visibility="gone"
-                android:text="@string/copy_link_to_clipboard"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/share_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/copy_to_clipboard_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/copy_to_clipboard_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/copy_link_to_clipboard"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -142,7 +144,7 @@
                 android:id="@+id/caution_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/caution_it_barks"
+                android:text="@string/caution_button_barks"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/headphones_icon_image_view"

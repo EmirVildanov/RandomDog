@@ -1,4 +1,4 @@
-package com.example.randomdog.ui.home
+package com.vildanov.randomdog.ui.home
 
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 import android.widget.ProgressBar
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 
@@ -23,6 +24,8 @@ class GlideImageLoader(
     private val progressBar: ProgressBar,
     private val downloadButton: Button,
     private val copyToClipboardButton: Button,
+    private val shareButton: Button,
+    private val buttonsInteractionLayout: ConstraintLayout,
     ) {
     fun load(url: String?, options: RequestOptions?) {
         if (url == null || options == null) return
@@ -71,14 +74,15 @@ class GlideImageLoader(
 
     private fun onConnecting() {
         progressBar.visibility = View.VISIBLE
-        downloadButton.isEnabled = false
-        copyToClipboardButton.visibility = View.GONE
+        buttonsInteractionLayout.visibility = View.GONE
     }
 
     private fun onFinished() {
         progressBar.progress = 0
         progressBar.visibility = View.GONE
-        copyToClipboardButton.visibility = View.VISIBLE
+        buttonsInteractionLayout.visibility = View.VISIBLE
+        copyToClipboardButton.isEnabled = true
+        shareButton.isEnabled = true
         imageView.visibility = View.VISIBLE
         downloadButton.isEnabled = true
     }

@@ -1,4 +1,4 @@
-package com.example.randomdog.data
+package com.vildanov.randomdog.data
 
 import kotlinx.serialization.Serializable
 

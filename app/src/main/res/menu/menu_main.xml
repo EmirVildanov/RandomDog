@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.randomdog.MainActivity">
+    tools:context="com.vildanov.randomdog.MainActivity">
 
 <!--    Menu id's have to be named after navigation destination fragments id's-->
 

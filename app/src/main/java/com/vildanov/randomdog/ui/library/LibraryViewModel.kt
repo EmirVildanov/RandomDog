@@ -1,9 +1,9 @@
-package com.example.randomdog.ui.library
+package com.vildanov.randomdog.ui.library
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.randomdog.data.DogPictureData
+import com.vildanov.randomdog.data.DogPictureData
 
 class LibraryViewModel : ViewModel() {
 

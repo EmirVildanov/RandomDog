@@ -1,4 +1,4 @@
-package com.example.randomdog.ui.home
+package com.vildanov.randomdog.ui.home
 
 import android.content.Context;
 import android.os.Handler
@@ -21,7 +21,6 @@ import android.os.Looper
 import okhttp3.*
 import okio.*
 import java.util.*
-import okhttp3.Interceptor
 
 import okhttp3.OkHttpClient
 import timber.log.Timber

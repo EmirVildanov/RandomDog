@@ -1,12 +1,12 @@
-package com.example.randomdog.ui.settings
+package com.vildanov.randomdog.ui.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.randomdog.data.DownloadedTextData
-import com.example.randomdog.databinding.ItemDownloadedTextBinding
+import com.vildanov.randomdog.data.DownloadedTextData
+import com.vildanov.randomdog.databinding.ItemDownloadedTextBinding
 
 class DownloadedTextAdapter(private val clickListener: DownloadedTextListener) :
     ListAdapter<DownloadedTextData, DownloadedTextAdapter.ViewHolder>(DownloadedTextItemDiffCallback()) {

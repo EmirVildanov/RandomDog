@@ -7,10 +7,10 @@
     <data>
         <variable
             name="downloadedTextItem"
-            type="com.example.randomdog.data.DownloadedTextData" />
+            type="com.vildanov.randomdog.data.DownloadedTextData" />
         <variable
             name="clickListener"
-            type="com.example.randomdog.ui.settings.DownloadedTextListener"/>
+            type="com.vildanov.randomdog.ui.settings.DownloadedTextListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

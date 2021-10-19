@@ -1,8 +1,7 @@
-package com.example.randomdog.network
+package com.vildanov.randomdog.network
 
 import android.app.Activity
-import android.content.Context
-import com.example.randomdog.RandomDogApplication
+import com.vildanov.randomdog.RandomDogApplication
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*

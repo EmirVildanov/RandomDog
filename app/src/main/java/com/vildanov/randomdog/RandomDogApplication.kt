@@ -1,4 +1,4 @@
-package com.example.randomdog
+package com.vildanov.randomdog
 
 import android.app.Activity
 import android.app.Application
@@ -10,7 +10,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceManager
-import com.example.randomdog.data.Language
+import com.vildanov.randomdog.data.Language
 import timber.log.Timber
 import java.util.*
 

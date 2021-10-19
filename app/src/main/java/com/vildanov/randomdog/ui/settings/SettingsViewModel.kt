@@ -1,10 +1,10 @@
-package com.example.randomdog.ui.settings
+package com.vildanov.randomdog.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.randomdog.data.DownloadedTextData
-import com.example.randomdog.network.RandomTextApi
+import com.vildanov.randomdog.data.DownloadedTextData
+import com.vildanov.randomdog.network.RandomTextApi
 import io.ktor.util.*
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi

@@ -1,6 +1,6 @@
-package com.example.randomdog.network
+package com.vildanov.randomdog.network
 
-import com.example.randomdog.data.DownloadedTextData
+import com.vildanov.randomdog.data.DownloadedTextData
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*

@@ -1,4 +1,4 @@
-package com.example.randomdog
+package com.vildanov.randomdog
 
 
 import android.media.MediaPlayer
@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
-import com.example.randomdog.databinding.ActivityMainBinding
+import com.vildanov.randomdog.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

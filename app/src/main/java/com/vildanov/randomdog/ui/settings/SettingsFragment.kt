@@ -1,4 +1,4 @@
-package com.example.randomdog.ui.settings
+package com.vildanov.randomdog.ui.settings
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.randomdog.MainActivity
-import com.example.randomdog.R
-import com.example.randomdog.data.Language
-import com.example.randomdog.RandomDogApplication
-import com.example.randomdog.databinding.FragmentSettingsBinding
+import com.vildanov.randomdog.MainActivity
+import com.vildanov.randomdog.R
+import com.vildanov.randomdog.data.Language
+import com.vildanov.randomdog.RandomDogApplication
+import com.vildanov.randomdog.databinding.FragmentSettingsBinding
 import io.ktor.util.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber

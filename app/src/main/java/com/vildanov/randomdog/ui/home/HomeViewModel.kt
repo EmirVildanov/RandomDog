@@ -1,13 +1,10 @@
-package com.example.randomdog.ui.home
+package com.vildanov.randomdog.ui.home
 
-import android.app.Application
-import android.view.View
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.randomdog.data.DogPictureData
-import com.example.randomdog.network.RandomDogApi
+import com.vildanov.randomdog.data.DogPictureData
+import com.vildanov.randomdog.network.RandomDogApi
 import io.ktor.util.*
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi

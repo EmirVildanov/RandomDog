@@ -1,4 +1,4 @@
-package com.example.randomdog.ui.library
+package com.vildanov.randomdog.ui.library
 
 import android.os.Bundle
 import android.view.LayoutInflater

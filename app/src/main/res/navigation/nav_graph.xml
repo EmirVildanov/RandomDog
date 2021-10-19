@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.example.randomdog.ui.home.HomeFragment"
+        android:name="com.vildanov.randomdog.ui.home.HomeFragment"
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home">
 
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="com.example.randomdog.ui.settings.SettingsFragment"
+        android:name="com.vildanov.randomdog.ui.settings.SettingsFragment"
         android:label="@string/settings_fragment_label"
         tools:layout="@layout/fragment_settings">
 
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/library_fragment"
-        android:name="com.example.randomdog.ui.library.LibraryFragment"
+        android:name="com.vildanov.randomdog.ui.library.LibraryFragment"
         android:label="LibraryFragment"
         tools:layout="@layout/fragment_library"/>
 </navigation>
