@@ -4,6 +4,8 @@ buildscript {
         kotlin_version = "1.5.31"
         timber_version = "5.0.1"
         ktor_version = "1.4.1"
+        room_version = "2.3.0"
+        joda_version = "2.10"
     }
     repositories {
         maven { url 'https://jitpack.io' }

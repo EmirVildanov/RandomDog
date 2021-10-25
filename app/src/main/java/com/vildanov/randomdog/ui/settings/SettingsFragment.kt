@@ -65,16 +65,6 @@ class SettingsFragment : Fragment() {
         binding.githubLinkTextView.movementMethod = LinkMovementMethod.getInstance()
         binding.siteLinkTextView.movementMethod = LinkMovementMethod.getInstance()
 
-        val adapter = DownloadedTextAdapter(DownloadedTextListener { textId ->
-            Timber.i("Text with $textId id was clicked")
-        })
-
-        viewModel.downloadedTexts.observe(viewLifecycleOwner, {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
-
         return binding.root
     }
 
