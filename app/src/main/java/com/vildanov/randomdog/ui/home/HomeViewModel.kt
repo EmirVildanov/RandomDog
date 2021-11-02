@@ -24,7 +24,6 @@ class HomeViewModel : ViewModel() {
     fun getNewImageUrl() {
         coroutineScope.launch {
             val response = RandomDogApi.getNewDog()
-            Timber.i("TESTOOO")
             response?.let { _currentDogPictureData.postValue(it) }
         }
     }

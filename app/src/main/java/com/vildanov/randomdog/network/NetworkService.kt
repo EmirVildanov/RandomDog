@@ -60,11 +60,8 @@ abstract class NetworkService {
                 return null
             }
         }
-        Timber.i("TEST1")
         try {
-            Timber.i("TEST2")
             response = funcBody()
-            Timber.i("TEST3")
             when {
                 responseIsSuccessful(response) -> return response
                 response.status == HttpStatusCode.Unauthorized -> throw NetworkException("Unauthorized")
@@ -95,28 +92,4 @@ abstract class NetworkService {
 
     open class NetworkException(message: String) : IllegalArgumentException(message)
     class UserNetworkException(message: String) : NetworkException(message)
-}
-
-object CustomTrustManager : X509TrustManager {
-    override fun checkClientTrusted(
-        chain: Array<X509Certificate?>?,
-        authType: String?
-    ) {
-        chain?.forEach {
-            Timber.i("Certificate checkClientTrusted: $it")
-        }
-    }
-
-    override fun checkServerTrusted(
-        chain: Array<X509Certificate?>?,
-        authType: String?
-    ) {
-        chain?.forEach {
-            Timber.i("Certificate checkServerTrusted: $it")
-        }
-    }
-
-    override fun getAcceptedIssuers(): Array<X509Certificate> {
-        return arrayOf()
-    }
 }
