@@ -45,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
+        setSupportActionBar(toolbar)
+
         (application as RandomDogApplication).setLanguage(this)
 
         mediaPlayer = MediaPlayer.create(this, R.raw.bark1)

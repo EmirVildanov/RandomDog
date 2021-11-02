@@ -60,8 +60,11 @@ abstract class NetworkService {
                 return null
             }
         }
+        Timber.i("TEST1")
         try {
+            Timber.i("TEST2")
             response = funcBody()
+            Timber.i("TEST3")
             when {
                 responseIsSuccessful(response) -> return response
                 response.status == HttpStatusCode.Unauthorized -> throw NetworkException("Unauthorized")

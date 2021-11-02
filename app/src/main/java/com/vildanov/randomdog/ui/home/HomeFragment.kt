@@ -40,10 +40,11 @@ import java.io.FileOutputStream
 import java.lang.Exception
 import java.lang.IllegalStateException
 import android.provider.MediaStore
+import com.vildanov.randomdog.utils.LocalizedTitleFragment
 import java.io.ByteArrayOutputStream
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : LocalizedTitleFragment(R.string.home_fragment_label) {
 
     private lateinit var viewModel: HomeViewModel
     private val trackPlayer = TrackPlayer()
@@ -198,7 +199,13 @@ class HomeFragment : Fragment() {
                 .error(R.drawable.ic_baseline_error_24)
                 .priority(Priority.HIGH)
 
-            glideImageLoader.load(pictureData.url, options)
+            Timber.i("Here is allright")
+            try {
+                glideImageLoader.load(pictureData.url, options)
+            } catch (exception: Exception) {
+                Timber.e(exception)
+            }
+            Timber.i("Here is not allright")
         })
 
         return binding.root

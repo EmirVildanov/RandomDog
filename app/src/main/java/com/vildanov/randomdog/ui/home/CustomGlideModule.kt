@@ -34,7 +34,7 @@ import timber.log.Timber
 @GlideModule
 final class CustomGlideModule : AppGlideModule() {
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        val okHttpClient = getUnsafeOkHttpClient()
+        val okHttpClient = OkHttpClient()
         registry.replace(
             GlideUrl::class.java,
             InputStream::class.java,
@@ -50,62 +50,6 @@ final class CustomGlideModule : AppGlideModule() {
         fun expect(url: String?, listener: UIonProgressListener?) {
             DispatchingProgressListener.expect(url, listener)
         }
-    }
-}
-
-/*
-    Method that creates unsafe HTTPS requests
-    In fact the network calls for getting image info in safe
-    So you should not be scared of using these Client
- */
-private fun getUnsafeOkHttpClient(): OkHttpClient {
-    return try {
-        val trustAllCerts =
-            arrayOf<TrustManager>(
-                object : X509TrustManager {
-                    override fun checkClientTrusted(
-                        chain: Array<X509Certificate>,
-                        authType: String
-                    ) {
-                    }
-
-                    override fun checkServerTrusted(
-                        chain: Array<X509Certificate>,
-                        authType: String
-                    ) {
-                    }
-
-                    override fun getAcceptedIssuers(): Array<X509Certificate> {
-                        return arrayOf()
-                    }
-                }
-            )
-
-        val sslContext = SSLContext.getInstance("TLS")
-        sslContext.init(null, trustAllCerts, SecureRandom())
-        val sslSocketFactory = sslContext.socketFactory
-        val builder = OkHttpClient.Builder()
-        builder.sslSocketFactory(
-            sslSocketFactory,
-            trustAllCerts[0] as X509TrustManager
-        )
-        builder.hostnameVerifier { _, _ -> true }
-
-        builder.addNetworkInterceptor { chain ->
-            val request = chain.request()
-            val response = chain.proceed(request)
-            val listener = DispatchingProgressListener()
-            if (response.body() == null) {
-                Timber.e("Null Glide response body")
-            }
-            response.newBuilder()
-                .body(OkHttpProgressResponseBody(request.url(), response.body()!!, listener))
-                .build()
-        }
-
-        builder.build()
-    } catch (e: Exception) {
-        throw RuntimeException(e)
     }
 }
 

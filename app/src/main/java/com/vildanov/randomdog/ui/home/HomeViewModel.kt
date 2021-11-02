@@ -8,6 +8,7 @@ import com.vildanov.randomdog.network.RandomDogApi
 import io.ktor.util.*
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
+import timber.log.Timber
 
 class HomeViewModel : ViewModel() {
 
@@ -23,6 +24,7 @@ class HomeViewModel : ViewModel() {
     fun getNewImageUrl() {
         coroutineScope.launch {
             val response = RandomDogApi.getNewDog()
+            Timber.i("TESTOOO")
             response?.let { _currentDogPictureData.postValue(it) }
         }
     }

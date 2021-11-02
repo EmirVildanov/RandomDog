@@ -1,20 +1,19 @@
 <resources>
-    <string name="app_name">RandomDog</string>
-    <!-- Strings used for fragments for navigation -->
+    <string name="app_name" translatable="false">RandomDog</string>
+
     <string name="home_fragment_label">Home</string>
+    <string name="settings_fragment_label">Settings</string>
+    <string name="library_fragment_label">Library</string>
 
     <string name="saved_language_key" translatable="false">com.emirvildanov.randomdog.PREFERENCE_LANGUAGE_KEY</string>
     <string name="saved_dog_images_number_key" translatable="false">com.emirvildanov.randomdog.PREFERENCE_SAVED_IMAGES_NUMBER_KEY</string>
 
     <string name="image_of_a_dog">Image of a dog</string>
     <string name="library">Library</string>
-    <string name="settings_fragment_label">Settings</string>
-    <string name="library_fragment_label">Library</string>
     <string name="caution_button_barks">Caution: button barks</string>
     <string name="load_new_dog">Load new dog</string>
     <string name="headphones_icon">headphonesIcon</string>
     <string name="thanks_to">Thanks to</string>
-    <string name="davidvalachovic"><a href="https://twitter.com/AdenFlorian">\@David Valachovic</a></string>
     <string name="it_is_empty_yet">It is empty yet</string>
     <string name="copy_link_to_clipboard">Copy link to clipboard</string>
     <string name="internet_is_not_available">Internet is not available</string>
@@ -22,13 +21,14 @@
     <string name="image_saved">Image saved</string>
     <string name="change_language">Change language</string>
     <string name="choose_language">Choose language</string>
-    <string name="you_may_visit_the_random_dog_site_author_s_github_here">You may visit the random.dog site author\'s github here :</string>
-    <string name="adenflorian_github"><a href="https://github.com/AdenFlorian/random.dog">AdenFlorian Github</a></string>
-    <string name="you_may_visit_the_random_dog_site_here">You may visit the random.dog site here :</string>
-    <string name="random_dog_site"><a href="https://random.dog/">random.dog</a></string>
+    <string name="you_may_visit_the_random_dog_site_author_s_github_here">You may visit the Dog API site author\'s Github here :</string>
+    <string name="you_may_visit_the_random_dog_site_here">You may visit the Dog API site here :</string>
     <string name="share">Share</string>
     <string name="saved_dog_image">Saved dog image</string>
     <string name="download_date">Download date:</string>
     <string name="close">Close</string>
     <string name="send_to">Send to</string>
+
+    <string name="random_dog_site" translatable="false"><a href="https://dog.ceo/dog-api/">Dog API</a></string>
+    <string name="elliottlandsborough" translatable="false"><a href="https://github.com/ElliottLandsborough">ElliottLandsborough</a></string>
 </resources>

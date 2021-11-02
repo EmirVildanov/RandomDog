@@ -14,13 +14,14 @@ import com.vildanov.randomdog.R
 import com.vildanov.randomdog.data.Language
 import com.vildanov.randomdog.RandomDogApplication
 import com.vildanov.randomdog.databinding.FragmentSettingsBinding
+import com.vildanov.randomdog.utils.LocalizedTitleFragment
 import io.ktor.util.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
 import java.lang.NullPointerException
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : LocalizedTitleFragment(R.string.settings_fragment_label) {
 
     private lateinit var viewModel: SettingsViewModel
 
@@ -62,7 +63,6 @@ class SettingsFragment : Fragment() {
             languagesOptionDialog?.show()
         }
 
-        binding.githubLinkTextView.movementMethod = LinkMovementMethod.getInstance()
         binding.siteLinkTextView.movementMethod = LinkMovementMethod.getInstance()
 
         return binding.root

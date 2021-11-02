@@ -27,10 +27,11 @@ import java.lang.IllegalStateException
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.vildanov.randomdog.utils.LocalizedTitleFragment
 import com.vildanov.randomdog.utils.extractExtension
 
 
-class LibraryFragment : Fragment() {
+class LibraryFragment : LocalizedTitleFragment(R.string.library_fragment_label) {
 
     private val viewModel: LibraryViewModel by lazy {
         val activity = requireNotNull(this.activity) {
