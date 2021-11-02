@@ -6,8 +6,8 @@ import androidx.room.*
 
 @Dao
 interface VideoDao {
-    @Query("select * from databasedogimage")
-    fun getDogImages(): LiveData<List<DatabaseDogImage>>
+    @Query("SELECT * FROM databasedogimage")
+    fun getDogImages(): List<DatabaseDogImage>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg dogImages: DatabaseDogImage)
@@ -16,7 +16,10 @@ interface VideoDao {
     fun insert(dogImage: DatabaseDogImage)
 }
 
-@Database(entities = [DatabaseDogImage::class], version = 1)
+@Database(
+    version = 1,
+    entities = [DatabaseDogImage::class],
+)
 abstract class DogImagesDatabase : RoomDatabase() {
     abstract val dogImageDao: VideoDao
 }
@@ -26,7 +29,7 @@ private lateinit var INSTANCE: DogImagesDatabase
 fun getDatabase(context: Context): DogImagesDatabase {
     synchronized(DogImagesDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
-            INSTANCE = Room.databaseBuilder(context.applicationContext, DogImagesDatabase::class.java, "dogImages").build()
+            INSTANCE = Room.databaseBuilder(context.applicationContext, DogImagesDatabase::class.java, "dog-images").build()
         }
     }
     return INSTANCE

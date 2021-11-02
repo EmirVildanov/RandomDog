@@ -4,6 +4,7 @@
     <string name="home_fragment_label">Home</string>
 
     <string name="saved_language_key" translatable="false">com.emirvildanov.randomdog.PREFERENCE_LANGUAGE_KEY</string>
+    <string name="saved_dog_images_number_key" translatable="false">com.emirvildanov.randomdog.PREFERENCE_SAVED_IMAGES_NUMBER_KEY</string>
 
     <string name="image_of_a_dog">Image of a dog</string>
     <string name="library">Library</string>
@@ -18,6 +19,7 @@
     <string name="copy_link_to_clipboard">Copy link to clipboard</string>
     <string name="internet_is_not_available">Internet is not available</string>
     <string name="link_copied_to_clipboard">Link copied to clipboard</string>
+    <string name="image_saved">Image saved</string>
     <string name="change_language">Change language</string>
     <string name="choose_language">Choose language</string>
     <string name="you_may_visit_the_random_dog_site_author_s_github_here">You may visit the random.dog site author\'s github here :</string>
@@ -25,4 +27,8 @@
     <string name="you_may_visit_the_random_dog_site_here">You may visit the random.dog site here :</string>
     <string name="random_dog_site"><a href="https://random.dog/">random.dog</a></string>
     <string name="share">Share</string>
+    <string name="saved_dog_image">Saved dog image</string>
+    <string name="download_date">Download date:</string>
+    <string name="close">Close</string>
+    <string name="send_to">Send to</string>
 </resources>

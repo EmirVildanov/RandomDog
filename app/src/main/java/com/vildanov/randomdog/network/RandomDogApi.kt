@@ -1,6 +1,5 @@
 package com.vildanov.randomdog.network
 
-import com.vildanov.randomdog.data.DogPictureData
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.util.*

@@ -86,8 +86,8 @@ class RandomDogApplication : Application() {
             }
         }
         activity?.resources?.updateConfiguration(configuration, activity.resources.displayMetrics)
-        (activity as MainActivity).bottomNavigationView.menu.clear();
-        activity.bottomNavigationView.inflateMenu(R.menu.menu_main);
+        (activity as MainActivity).bottomNavigationView.menu.clear()
+        activity.bottomNavigationView.inflateMenu(R.menu.menu_main)
         Timber.i("Set language: ${chosenLanguage?.name}")
     }
 

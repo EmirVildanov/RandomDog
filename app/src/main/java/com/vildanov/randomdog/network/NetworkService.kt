@@ -79,9 +79,10 @@ abstract class NetworkService {
             Timber.e("Something wrong with server connection")
             Timber.e(exception)
             throw NetworkException("Check your Internet connection and try again")
-        } catch (e: Exception) {
+        } catch (exception: Exception) {
             Timber.e("Unknown exception")
-            throw e
+            Timber.e(exception)
+            throw exception
         }
     }
 

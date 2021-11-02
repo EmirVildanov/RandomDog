@@ -26,6 +26,21 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
 import java.util.*
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Environment
+import androidx.preference.PreferenceManager
+import com.vildanov.randomdog.constants.DOG_IMAGES_FOLDER_NAME
+import com.vildanov.randomdog.database.getDatabase
+import com.vildanov.randomdog.repository.DogImagesRepository
+import com.vildanov.randomdog.utils.combine
+import com.vildanov.randomdog.utils.extractExtension
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
+import java.lang.IllegalStateException
+import android.provider.MediaStore
+import java.io.ByteArrayOutputStream
 
 
 class HomeFragment : Fragment() {
@@ -33,8 +48,11 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private val trackPlayer = TrackPlayer()
 
-    private var viewModelJob = SupervisorJob()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var fragmentJob = SupervisorJob()
+    private val coroutineScope = CoroutineScope(fragmentJob + Dispatchers.Main)
+
+    private lateinit var glideImageLoader: GlideImageLoader
+    private var currentDownloadedImageInfo: Pair<Bitmap, String>? = null
 
     @ExperimentalSerializationApi
     @KtorExperimentalAPI
@@ -54,15 +72,48 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = activity
 
+        val onConnecting = {
+            binding.imageLoadingProgressBar.visibility = View.VISIBLE
+            binding.interactionButtonsLayout.visibility = View.GONE
+        }
+
+        val onFinished = {
+            binding.imageLoadingProgressBar.progress = 0
+            binding.imageLoadingProgressBar.visibility = View.GONE
+            binding.interactionButtonsLayout.visibility = View.VISIBLE
+            binding.copyToClipboardButton.isEnabled = true
+            binding.shareButton.isEnabled = true
+            binding.downloadToLibraryButton.isEnabled = true
+            binding.loadNewImageButton.isEnabled = true
+            binding.imageViewOfADogInside.visibility = View.VISIBLE
+        }
+
+        val onResourceReady = { resource: Bitmap, url: String ->
+            currentDownloadedImageInfo = resource to url
+        }
+
+        glideImageLoader = GlideImageLoader(
+            binding.imageViewOfADogInside,
+            binding.imageLoadingProgressBar,
+            onConnecting,
+            onFinished,
+            onResourceReady
+        )
+
         binding.loadNewImageButton.setOnClickListener {
             binding.loadNewImageButton.isEnabled = false
             binding.copyToClipboardButton.isEnabled = false
             binding.shareButton.isEnabled = false
+            binding.downloadToLibraryButton.isEnabled = false
             playBarkSound()
             val activity = requireActivity()
             val application = activity.application as RandomDogApplication
             if (!application.isInternetAvailable(activity)) {
                 application.showToast(activity, getString(R.string.internet_is_not_available))
+                binding.loadNewImageButton.isEnabled = true
+                binding.copyToClipboardButton.isEnabled = true
+                binding.shareButton.isEnabled = true
+                binding.downloadToLibraryButton.isEnabled = true
             } else {
                 val currentTime = Calendar.getInstance().time
                 Timber.i("Date: $currentTime")
@@ -81,12 +132,61 @@ class HomeFragment : Fragment() {
         }
 
         binding.shareButton.setOnClickListener {
-            val sharingIntent = Intent(Intent.ACTION_SEND)
-            sharingIntent.type = "text/plain"
-            val shareBody = viewModel.currentDogPictureData.value!!.url
-            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Cute dog url")
-            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(sharingIntent, "Share via"))
+//            val sharingIntent = Intent(Intent.ACTION_SEND)
+//            sharingIntent.type = "text/plain"
+//            val shareBody = viewModel.currentDogPictureData.value!!.url
+//            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Cute dog url")
+//            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+//            startActivity(Intent.createChooser(sharingIntent, "Share via"))
+//
+            val bytes = ByteArrayOutputStream()
+            val bitmap = currentDownloadedImageInfo!!.first
+            val currentItemExtension = extractExtension(currentDownloadedImageInfo!!.second)
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+            val path: String = MediaStore.Images.Media.insertImage(
+                requireActivity().getContentResolver(),
+                bitmap,
+                "DownloadedDogImage",
+                null
+            )
+            val uriToImage = Uri.parse(path)
+            val shareIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, uriToImage)
+                type = "image/$currentItemExtension"
+            }
+            startActivity(Intent.createChooser(shareIntent, resources.getText(R.string.send_to)))
+        }
+
+        binding.downloadToLibraryButton.setOnClickListener {
+            binding.downloadToLibraryButton.isEnabled = false
+            val currentDownloadedImageSnapshot = viewModel.currentDogPictureData.value
+                ?: throw IllegalStateException("Null dog image data")
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+
+            val savedImagesNumber =
+                (sharedPreferences.getString(getString(R.string.saved_dog_images_number_key), null)
+                    ?: "0").toInt()
+            val nextFileIndex = (savedImagesNumber + 1).toString()
+
+            with(sharedPreferences.edit()) {
+                putString(activity?.getString(R.string.saved_dog_images_number_key), nextFileIndex)
+                apply()
+            }
+
+            val currentItemExtension = extractExtension(currentDownloadedImageSnapshot.url)
+            val nextFileName = "DogItem$nextFileIndex.$currentItemExtension"
+
+            coroutineScope.launch {
+                val database = getDatabase(requireActivity())
+                val dogImagesRepository = DogImagesRepository(database)
+                dogImagesRepository.addImage(currentDownloadedImageSnapshot, nextFileName, "TEST_DESCRIPTION")
+            }
+            saveImage(nextFileName)
+
+            val application = requireActivity().application as RandomDogApplication
+            application.showToast(requireActivity(), getString(R.string.image_saved))
         }
 
         binding.nicknameTextView.movementMethod = LinkMovementMethod.getInstance()
@@ -98,14 +198,7 @@ class HomeFragment : Fragment() {
                 .error(R.drawable.ic_baseline_error_24)
                 .priority(Priority.HIGH)
 
-            GlideImageLoader(
-                binding.imageViewOfADogInside,
-                binding.imageLoadingProgressBar,
-                binding.loadNewImageButton,
-                binding.copyToClipboardButton,
-                binding.shareButton,
-                binding.interactionButtonsLayout
-            ).load(pictureData.url, options)
+            glideImageLoader.load(pictureData.url, options)
         })
 
         return binding.root
@@ -129,6 +222,42 @@ class HomeFragment : Fragment() {
                 Timber.e("Afd is null")
             }
         }
+    }
+
+    private fun saveImage(fileName: String): String? {
+        val currentDownloadedImageInfoSnapshot = currentDownloadedImageInfo
+            ?: throw IllegalStateException("There is no image info to save")
+        var savedImagePath: String? = null
+        if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
+            val storageDir = File(
+                combine(
+                    requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                        .toString(), DOG_IMAGES_FOLDER_NAME
+                )
+            )
+            var success = true
+            if (!storageDir.exists()) {
+                success = storageDir.mkdirs()
+            }
+            if (success) {
+                val imageFile = File(storageDir, fileName)
+                savedImagePath = imageFile.absolutePath
+                try {
+                    val fOut = FileOutputStream(imageFile)
+                    currentDownloadedImageInfoSnapshot.first.compress(
+                        Bitmap.CompressFormat.JPEG,
+                        100,
+                        fOut
+                    )
+                    fOut.close()
+                    Timber.i("DOG IMAGE SAVED")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Timber.i("DOG IMAGE WAS NOT SAVED")
+                }
+            }
+        }
+        return savedImagePath
     }
 }
 
