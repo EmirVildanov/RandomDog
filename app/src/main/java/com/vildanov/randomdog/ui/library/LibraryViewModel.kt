@@ -2,7 +2,6 @@ package com.vildanov.randomdog.ui.library
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.vildanov.randomdog.network.DogPictureData
 import com.vildanov.randomdog.database.getDatabase
 import com.vildanov.randomdog.repository.DogImagesRepository
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +32,7 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(LibraryViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return LibraryViewModel(app) as T

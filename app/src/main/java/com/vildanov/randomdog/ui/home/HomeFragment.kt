@@ -3,45 +3,40 @@ package com.vildanov.randomdog.ui.home
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.bumptech.glide.Priority
 import com.bumptech.glide.request.RequestOptions
 import com.vildanov.randomdog.MainActivity
 import com.vildanov.randomdog.R
 import com.vildanov.randomdog.RandomDogApplication
+import com.vildanov.randomdog.constants.DOG_IMAGES_FOLDER_NAME
+import com.vildanov.randomdog.database.getDatabase
 import com.vildanov.randomdog.databinding.FragmentHomeBinding
-import io.ktor.util.*
+import com.vildanov.randomdog.repository.DogImagesRepository
+import com.vildanov.randomdog.utils.LocalizedTitleFragment
+import com.vildanov.randomdog.utils.combine
+import com.vildanov.randomdog.utils.extractExtension
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ExperimentalSerializationApi
 import timber.log.Timber
-import java.util.*
-import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
-import android.os.Environment
-import androidx.preference.PreferenceManager
-import com.vildanov.randomdog.constants.DOG_IMAGES_FOLDER_NAME
-import com.vildanov.randomdog.database.getDatabase
-import com.vildanov.randomdog.repository.DogImagesRepository
-import com.vildanov.randomdog.utils.combine
-import com.vildanov.randomdog.utils.extractExtension
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.Exception
-import java.lang.IllegalStateException
-import android.provider.MediaStore
-import com.vildanov.randomdog.utils.LocalizedTitleFragment
-import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 class HomeFragment : LocalizedTitleFragment(R.string.home_fragment_label) {
@@ -55,8 +50,6 @@ class HomeFragment : LocalizedTitleFragment(R.string.home_fragment_label) {
     private lateinit var glideImageLoader: GlideImageLoader
     private var currentDownloadedImageInfo: Pair<Bitmap, String>? = null
 
-    @ExperimentalSerializationApi
-    @KtorExperimentalAPI
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

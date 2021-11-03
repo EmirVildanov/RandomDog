@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# Some of that saves Glide annotations for minifying
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
  <init>(...);
@@ -31,6 +32,32 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
   *** rewind();
 }
+
+# Save retrofit annotations
+-keepclassmembers,allowobfuscation class * {
+  @retrofit2.http.GET <fields>;
+}
+#-keep class retrofit.** { *; }
+
+
+
+# Save Moshi annotations
+-keepclassmembers,allowobfuscation class * {
+  @com.squareup.moshi.Json <fields>;
+}
+# JSR 305 annotations are for embedding nullability information.
+#-dontwarn javax.annotation.**
+#-keepclasseswithmembers class * {
+#    @com.squareup.moshi.* <methods>;
+#}
+#-keep @com.squareup.moshi.JsonQualifier interface *
+## Enum field names are used by the integrated EnumJsonAdapter.
+## values() is synthesized by the Kotlin compiler and is used by EnumJsonAdapter indirectly
+## Annotate enums with @JsonClass(generateAdapter = false) to use them with Moshi.
+#-keepclassmembers @com.squareup.moshi.JsonClass class * extends java.lang.Enum {
+#    <fields>;
+#    **[] values();
+#}
 
 # for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
