@@ -29,6 +29,6 @@
     <fragment
         android:id="@+id/library_fragment"
         android:name="com.vildanov.randomdog.ui.library.LibraryFragment"
-        android:label="LibraryFragment"
+        android:label="@string/library_fragment_label"
         tools:layout="@layout/fragment_library"/>
 </navigation>

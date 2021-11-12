@@ -2,7 +2,6 @@ package com.vildanov.randomdog.ui.settings
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +10,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.vildanov.randomdog.MainActivity
 import com.vildanov.randomdog.R
-import com.vildanov.randomdog.data.Language
 import com.vildanov.randomdog.RandomDogApplication
+import com.vildanov.randomdog.data.Language
 import com.vildanov.randomdog.databinding.FragmentSettingsBinding
-import io.ktor.util.*
-import kotlinx.serialization.ExperimentalSerializationApi
+import com.vildanov.randomdog.utils.LocalizedTitleFragment
 import timber.log.Timber
-import java.lang.NullPointerException
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : LocalizedTitleFragment(R.string.settings_fragment_label) {
 
     private lateinit var viewModel: SettingsViewModel
 
-    @ExperimentalSerializationApi
-    @KtorExperimentalAPI
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,18 +57,7 @@ class SettingsFragment : Fragment() {
             languagesOptionDialog?.show()
         }
 
-        binding.githubLinkTextView.movementMethod = LinkMovementMethod.getInstance()
         binding.siteLinkTextView.movementMethod = LinkMovementMethod.getInstance()
-
-        val adapter = DownloadedTextAdapter(DownloadedTextListener { textId ->
-            Timber.i("Text with $textId id was clicked")
-        })
-
-        viewModel.downloadedTexts.observe(viewLifecycleOwner, {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
 
         return binding.root
     }

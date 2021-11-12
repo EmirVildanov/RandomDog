@@ -5,7 +5,9 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -19,10 +21,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     lateinit var mediaPlayer: MediaPlayer
 
     // TODO: Menu labels change label if destroy activity and than return to it
+    // TODO: Splash screen
 
     override fun onCreate(savedInstanceState: Bundle?) {
 //        setTheme(R.style.Theme_RandomDog_NoActionBar)
@@ -37,8 +41,11 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNavigationView = binding.bottomNavView
+        toolbar = binding.toolbar
         bottomNavigationView.setupWithNavController(navController)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        setSupportActionBar(toolbar)
 
         (application as RandomDogApplication).setLanguage(this)
 
@@ -62,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 || super.onOptionsItemSelected(item)
     }
 
+    // Trick over localization
     override fun onMenuOpened(featureId: Int, menu: Menu): Boolean {
         menu.clear()
         menuInflater.inflate(R.menu.menu_main, menu)

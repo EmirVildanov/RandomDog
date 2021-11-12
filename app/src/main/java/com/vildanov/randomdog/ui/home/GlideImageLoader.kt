@@ -1,8 +1,7 @@
 package com.vildanov.randomdog.ui.home
 
+import android.app.Activity
 import android.graphics.drawable.Drawable
-import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 
 import com.bumptech.glide.load.engine.GlideException
@@ -14,24 +13,33 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 import android.widget.ProgressBar
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import android.graphics.Bitmap
+import com.bumptech.glide.request.target.CustomTarget
+
+import com.bumptech.glide.request.transition.Transition
+
+import android.os.Environment
+import com.vildanov.randomdog.constants.DOG_IMAGES_FOLDER_NAME
+import com.vildanov.randomdog.utils.combine
+import timber.log.Timber
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
+import java.lang.IllegalStateException
 
 
 class GlideImageLoader(
     private val imageView: ImageView,
     private val progressBar: ProgressBar,
-    private val downloadButton: Button,
-    private val copyToClipboardButton: Button,
-    private val shareButton: Button,
-    private val buttonsInteractionLayout: ConstraintLayout,
-    ) {
+    private val onConnecting: () -> Unit,
+    private val onFinished: () -> Unit,
+    private val onResourceReady: (Bitmap, String) -> Unit
+) {
     fun load(url: String?, options: RequestOptions?) {
         if (url == null || options == null) return
         onConnecting()
 
-        //set Listener & start
         CustomGlideModule.expect(url, object : UIonProgressListener {
             override fun onProgress(bytesRead: Long, expectedLength: Long) {
                 progressBar.progress = (100 * bytesRead / expectedLength).toInt()
@@ -40,16 +48,14 @@ class GlideImageLoader(
             override val granualityPercentage: Float
                 get() = 1.0f
         })
-        //Get Image
         Glide.with(imageView.context)
+            .asBitmap()
             .load(url)
-            .transition(withCrossFade())
-            .apply(options.skipMemoryCache(true))
-            .listener(object : RequestListener<Drawable?> {
+            .listener(object : RequestListener<Bitmap?> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable?>?,
+                    target: com.bumptech.glide.request.target.Target<Bitmap?>?,
                     isFirstResource: Boolean
                 ): Boolean {
                     CustomGlideModule.forget(url)
@@ -58,9 +64,9 @@ class GlideImageLoader(
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable?,
+                    resource: Bitmap?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable?>?,
+                    target: com.bumptech.glide.request.target.Target<Bitmap?>?,
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
@@ -69,22 +75,18 @@ class GlideImageLoader(
                     return false
                 }
             })
-            .into(imageView)
-    }
+            .into(
+                object : CustomTarget<Bitmap?>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap?>?
+                    ) {
+                        imageView.setImageBitmap(resource)
+                        onResourceReady(resource, url)
+                    }
 
-    private fun onConnecting() {
-        progressBar.visibility = View.VISIBLE
-        buttonsInteractionLayout.visibility = View.GONE
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                }
+            )
     }
-
-    private fun onFinished() {
-        progressBar.progress = 0
-        progressBar.visibility = View.GONE
-        buttonsInteractionLayout.visibility = View.VISIBLE
-        copyToClipboardButton.isEnabled = true
-        shareButton.isEnabled = true
-        imageView.visibility = View.VISIBLE
-        downloadButton.isEnabled = true
-    }
-
 }
