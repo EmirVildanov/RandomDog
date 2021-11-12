@@ -1,4 +1,4 @@
-package com.vildanov.randomdog.utils
+package com.vildanov.randomdog.ui
 
 import android.os.Bundle
 import android.view.View

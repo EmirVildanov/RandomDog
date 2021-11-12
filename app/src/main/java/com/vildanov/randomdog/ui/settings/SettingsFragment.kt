@@ -13,7 +13,7 @@ import com.vildanov.randomdog.R
 import com.vildanov.randomdog.RandomDogApplication
 import com.vildanov.randomdog.data.Language
 import com.vildanov.randomdog.databinding.FragmentSettingsBinding
-import com.vildanov.randomdog.utils.LocalizedTitleFragment
+import com.vildanov.randomdog.ui.LocalizedTitleFragment
 import timber.log.Timber
 
 

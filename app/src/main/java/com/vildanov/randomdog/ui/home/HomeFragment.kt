@@ -25,7 +25,7 @@ import com.vildanov.randomdog.constants.DOG_IMAGES_FOLDER_NAME
 import com.vildanov.randomdog.database.getDatabase
 import com.vildanov.randomdog.databinding.FragmentHomeBinding
 import com.vildanov.randomdog.repository.DogImagesRepository
-import com.vildanov.randomdog.utils.LocalizedTitleFragment
+import com.vildanov.randomdog.ui.LocalizedTitleFragment
 import com.vildanov.randomdog.utils.combine
 import com.vildanov.randomdog.utils.extractExtension
 import kotlinx.coroutines.CoroutineScope
@@ -126,13 +126,6 @@ class HomeFragment : LocalizedTitleFragment(R.string.home_fragment_label) {
         }
 
         binding.shareButton.setOnClickListener {
-//            val sharingIntent = Intent(Intent.ACTION_SEND)
-//            sharingIntent.type = "text/plain"
-//            val shareBody = viewModel.currentDogPictureData.value!!.url
-//            sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Cute dog url")
-//            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-//            startActivity(Intent.createChooser(sharingIntent, "Share via"))
-//
             val bytes = ByteArrayOutputStream()
             val bitmap = currentDownloadedImageInfo!!.first
             val currentItemExtension = extractExtension(currentDownloadedImageInfo!!.second)
